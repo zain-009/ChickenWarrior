@@ -1,0 +1,107 @@
+[gd_scene load_steps=10 format=3 uid="uid://co2qwumxjkxxs"]
+
+[ext_resource type="FontFile" uid="uid://cn4jkxgfcjpch" path="res://assets/demon parallax forest/Jersey15-Regular.ttf" id="1_cp47i"]
+[ext_resource type="Script" path="res://scenes/menu.gd" id="1_md8ll"]
+[ext_resource type="Texture2D" uid="uid://bv3mwxkqvr3j5" path="res://assets/demon parallax forest/parallax-demon-woods-bg.png" id="1_ovk1t"]
+[ext_resource type="Texture2D" uid="uid://cwtshtn23hb8b" path="res://assets/demon parallax forest/parallax-demon-woods-far-trees.png" id="2_e171e"]
+[ext_resource type="Texture2D" uid="uid://c8vfrigfp67yo" path="res://assets/demon parallax forest/parallax-demon-woods-mid-trees.png" id="3_pf1ji"]
+[ext_resource type="Texture2D" uid="uid://cc28qou80immj" path="res://assets/demon parallax forest/parallax-demon-woods-close-trees.png" id="4_pnabj"]
+[ext_resource type="Texture2D" uid="uid://cyiihvjnft3i3" path="res://assets/demon parallax forest/chicken.png" id="6_0o8u5"]
+[ext_resource type="Texture2D" uid="uid://b6dc4tgm87toq" path="res://assets/demon parallax forest/gun.png" id="8_1aenb"]
+[ext_resource type="AudioStream" uid="uid://befh6y733m14j" path="res://assets/music/menuMusic.mp3" id="8_a8und"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1280.0
+offset_bottom = -720.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_md8ll")
+
+[node name="Container" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container"]
+z_index = 1
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="Play" type="Button" parent="Container/VBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_cp47i")
+theme_override_font_sizes/font_size = 32
+text = "Play Game"
+
+[node name="Quit" type="Button" parent="Container/VBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_cp47i")
+theme_override_font_sizes/font_size = 32
+text = "Quit"
+
+[node name="BG" type="Node" parent="."]
+
+[node name="Parallax-demon-woods-bg" type="Sprite2D" parent="BG"]
+position = Vector2(640, 360)
+scale = Vector2(2.66667, 2.64706)
+texture = ExtResource("1_ovk1t")
+
+[node name="Parallax-demon-woods-far-trees" type="Sprite2D" parent="BG"]
+position = Vector2(711.794, 366.5)
+scale = Vector2(2.65809, 2.65809)
+texture = ExtResource("2_e171e")
+
+[node name="Parallax-demon-woods-mid-trees" type="Sprite2D" parent="BG"]
+position = Vector2(711.794, 367.5)
+scale = Vector2(2.65809, 2.65809)
+texture = ExtResource("3_pf1ji")
+
+[node name="Parallax-demon-woods-close-trees" type="Sprite2D" parent="BG"]
+position = Vector2(712, 366)
+scale = Vector2(2.66176, 2.66176)
+texture = ExtResource("4_pnabj")
+
+[node name="Label" type="Label" parent="."]
+z_index = 1
+layout_mode = 2
+offset_left = 331.0
+offset_top = 73.0
+offset_right = 934.0
+offset_bottom = 162.0
+theme_override_fonts/font = ExtResource("1_cp47i")
+theme_override_font_sizes/font_size = 88
+text = "Chicken Impossible"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+texture_filter = 1
+position = Vector2(193.556, 541.998)
+rotation = -0.112962
+scale = Vector2(9.44842, 9.44842)
+texture = ExtResource("6_0o8u5")
+hframes = 4
+vframes = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
+texture_filter = 1
+position = Vector2(10.2528, 3.93278)
+texture = ExtResource("8_1aenb")
+
+[node name="MenuMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_a8und")
+volume_db = -10.361
+autoplay = true
+parameters/looping = true
+
+[connection signal="pressed" from="Container/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Container/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

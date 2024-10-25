@@ -1,0 +1,105 @@
+[gd_scene load_steps=11 format=3 uid="uid://ciro3rtc56l8e"]
+
+[ext_resource type="Script" path="res://scenes/chicken.gd" id="1_80qep"]
+[ext_resource type="Texture2D" uid="uid://cyiihvjnft3i3" path="res://assets/demon parallax forest/chicken.png" id="1_o3tg4"]
+[ext_resource type="Texture2D" uid="uid://b6dc4tgm87toq" path="res://assets/demon parallax forest/gun.png" id="3_e2ejo"]
+[ext_resource type="AudioStream" uid="uid://o1x1lthewrae" path="res://assets/music/pewpew.mp3" id="4_qih47"]
+[ext_resource type="Texture2D" uid="uid://drpireaed48px" path="res://assets/demon parallax forest/UI_Flat_Bar11a.png" id="5_a7x10"]
+[ext_resource type="Texture2D" uid="uid://dpgu3230js6s8" path="res://assets/demon parallax forest/UI_Flat_BarFill01e.png" id="6_x8oam"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_owag0"]
+
+[sub_resource type="Animation" id="Animation_ejm2b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_uvtkl"]
+resource_name = "running"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fs1ex"]
+_data = {
+"RESET": SubResource("Animation_ejm2b"),
+"running": SubResource("Animation_uvtkl")
+}
+
+[node name="Chicken" type="CharacterBody2D"]
+script = ExtResource("1_80qep")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_owag0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_o3tg4")
+hframes = 4
+vframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fs1ex")
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(280, -117)
+
+[node name="gun" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(8, 3)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("3_e2ejo")
+
+[node name="PositionMarker" type="Marker2D" parent="."]
+position = Vector2(21, 0)
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_qih47")
+
+[node name="Control" type="Control" parent="."]
+z_index = 10
+layout_mode = 3
+anchors_preset = 0
+offset_left = -108.0
+offset_top = -334.0
+offset_right = -42.0
+offset_bottom = -318.0
+scale = Vector2(2.205, 1.607)
+
+[node name="HealthBar" type="TextureProgressBar" parent="Control"]
+z_index = 10
+texture_filter = 1
+clip_contents = true
+layout_direction = 2
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 10.0
+scale = Vector2(2.205, 1.607)
+value = 75.0
+texture_under = ExtResource("5_a7x10")
+texture_progress = ExtResource("6_x8oam")
+texture_progress_offset = Vector2(2.97, 3.515)

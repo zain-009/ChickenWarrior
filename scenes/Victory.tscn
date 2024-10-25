@@ -1,0 +1,89 @@
+[gd_scene load_steps=8 format=3 uid="uid://ild85yjqkpas"]
+
+[ext_resource type="Script" path="res://scenes/Victory.gd" id="1_vffcp"]
+[ext_resource type="FontFile" uid="uid://cn4jkxgfcjpch" path="res://assets/demon parallax forest/Jersey15-Regular.ttf" id="2_il2gs"]
+[ext_resource type="Texture2D" uid="uid://bv3mwxkqvr3j5" path="res://assets/demon parallax forest/parallax-demon-woods-bg.png" id="3_5cjt1"]
+[ext_resource type="Texture2D" uid="uid://cwtshtn23hb8b" path="res://assets/demon parallax forest/parallax-demon-woods-far-trees.png" id="4_elfpn"]
+[ext_resource type="Texture2D" uid="uid://c8vfrigfp67yo" path="res://assets/demon parallax forest/parallax-demon-woods-mid-trees.png" id="5_cds55"]
+[ext_resource type="Texture2D" uid="uid://cc28qou80immj" path="res://assets/demon parallax forest/parallax-demon-woods-close-trees.png" id="6_d5ked"]
+[ext_resource type="AudioStream" uid="uid://i8dhb5uphvjs" path="res://assets/music/bosskill.mp3" id="7_sec0o"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1280.0
+offset_bottom = -720.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vffcp")
+
+[node name="Container" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container"]
+z_index = 1
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="Play" type="Button" parent="Container/VBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_il2gs")
+theme_override_font_sizes/font_size = 32
+text = "Play Again"
+
+[node name="Quit" type="Button" parent="Container/VBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_il2gs")
+theme_override_font_sizes/font_size = 32
+text = "Quit"
+
+[node name="BG" type="Node" parent="."]
+
+[node name="Parallax-demon-woods-bg" type="Sprite2D" parent="BG"]
+position = Vector2(640, 360)
+scale = Vector2(2.66667, 2.64706)
+texture = ExtResource("3_5cjt1")
+
+[node name="Parallax-demon-woods-far-trees" type="Sprite2D" parent="BG"]
+position = Vector2(711.794, 366.5)
+scale = Vector2(2.65809, 2.65809)
+texture = ExtResource("4_elfpn")
+
+[node name="Parallax-demon-woods-mid-trees" type="Sprite2D" parent="BG"]
+position = Vector2(711.794, 367.5)
+scale = Vector2(2.65809, 2.65809)
+texture = ExtResource("5_cds55")
+
+[node name="Parallax-demon-woods-close-trees" type="Sprite2D" parent="BG"]
+position = Vector2(712, 366)
+scale = Vector2(2.66176, 2.66176)
+texture = ExtResource("6_d5ked")
+
+[node name="Label" type="Label" parent="."]
+z_index = 1
+layout_mode = 2
+offset_left = 523.0
+offset_top = 71.0
+offset_right = 761.0
+offset_bottom = 160.0
+theme_override_fonts/font = ExtResource("2_il2gs")
+theme_override_font_sizes/font_size = 88
+text = "Victory"
+
+[node name="VictoryMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_sec0o")
+autoplay = true
+parameters/looping = true
+
+[connection signal="pressed" from="Container/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Container/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

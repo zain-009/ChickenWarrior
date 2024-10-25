@@ -1,0 +1,176 @@
+[gd_scene load_steps=16 format=3 uid="uid://c5wl25pa2i2ug"]
+
+[ext_resource type="Script" path="res://scenes/demon.gd" id="1_h558l"]
+[ext_resource type="Texture2D" uid="uid://dw8t0uqh61ugx" path="res://assets/demon parallax forest/NightBorne.png" id="1_mreqq"]
+[ext_resource type="Texture2D" uid="uid://drpireaed48px" path="res://assets/demon parallax forest/UI_Flat_Bar11a.png" id="3_r1lpo"]
+[ext_resource type="Texture2D" uid="uid://dpgu3230js6s8" path="res://assets/demon parallax forest/UI_Flat_BarFill01e.png" id="4_sfchb"]
+[ext_resource type="AudioStream" uid="uid://5jv8x3smonu8" path="res://assets/music/kill.mp3" id="5_o0f8w"]
+[ext_resource type="AudioStream" uid="uid://i8dhb5uphvjs" path="res://assets/music/bosskill.mp3" id="6_j2b21"]
+
+[sub_resource type="Animation" id="Animation_0vsik"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_64a25"]
+resource_name = "attacking"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.233333, 0.266667, 0.3, 0.366667, 0.433333, 0.5, 0.566667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [46, 47, 49, 50, 51, 52, 53, 54, 55, 56, 57]
+}
+
+[sub_resource type="Animation" id="Animation_0gn1x"]
+resource_name = "dying"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667, 0.333333, 0.4, 0.466667, 0.5, 0.533333, 0.566667, 0.6, 0.633333, 0.666667, 0.7, 0.733333, 0.766667, 0.8, 0.833333, 0.866667, 0.9, 0.933333, 0.966667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114]
+}
+
+[sub_resource type="Animation" id="Animation_leti0"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667, 0.333333, 0.4, 0.466667, 0.533333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_rbpo5"]
+resource_name = "running"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [23, 24, 25, 26, 27, 28]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_in2rh"]
+_data = {
+"RESET": SubResource("Animation_0vsik"),
+"attacking": SubResource("Animation_64a25"),
+"dying": SubResource("Animation_0gn1x"),
+"idle": SubResource("Animation_leti0"),
+"running": SubResource("Animation_rbpo5")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7wots"]
+height = 33.3333
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2yuac"]
+radius = 376.334
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0fml4"]
+size = Vector2(40.3333, 50.8333)
+
+[node name="Demon" type="CharacterBody2D"]
+scale = Vector2(3, 3)
+script = ExtResource("1_h558l")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_mreqq")
+flip_h = true
+hframes = 23
+vframes = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_in2rh")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5.66667)
+shape = SubResource("CapsuleShape2D_7wots")
+
+[node name="FireTrigger" type="Area2D" parent="."]
+position = Vector2(0, 0.333333)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FireTrigger"]
+position = Vector2(0, 0.333333)
+shape = SubResource("CircleShape2D_2yuac")
+
+[node name="Attack Trigger" type="Area2D" parent="."]
+position = Vector2(-18.3333, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack Trigger"]
+position = Vector2(8.49997, 0.749999)
+shape = SubResource("RectangleShape2D_0fml4")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -16.0
+offset_top = -15.0
+offset_right = 15.0
+offset_bottom = -10.0
+
+[node name="HealthBar" type="TextureProgressBar" parent="Control"]
+texture_filter = 1
+clip_contents = true
+layout_direction = 2
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 10.0
+scale = Vector2(1.035, 0.485)
+value = 75.0
+texture_under = ExtResource("3_r1lpo")
+texture_progress = ExtResource("4_sfchb")
+texture_progress_offset = Vector2(2.97, 3.515)
+
+[node name="DyingMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_o0f8w")
+
+[node name="BosskillMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_j2b21")
+
+[node name="FireballMarker" type="Marker2D" parent="."]
+position = Vector2(-18.63, 6.74)
+
+[connection signal="body_entered" from="FireTrigger" to="." method="_on_fire_trigger_body_entered"]
+[connection signal="body_entered" from="Attack Trigger" to="." method="_on_attack_trigger_body_entered"]
+[connection signal="body_exited" from="Attack Trigger" to="." method="_on_attack_trigger_body_exited"]

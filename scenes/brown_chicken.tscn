@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cl14ke37mjoq3"]
+
+[ext_resource type="Texture2D" uid="uid://u0t7iu4akv04" path="res://assets/demon parallax forest/Chicken_Sprite_Sheet_Light_Brown.png" id="1_yyuxe"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8y5lj"]
+
+[node name="BrownChicken" type="RigidBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8y5lj")
+
+[node name="ChickenSpriteSheetLightBrown" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(1.315, 1.315)
+texture = ExtResource("1_yyuxe")
+hframes = 4
+vframes = 4
